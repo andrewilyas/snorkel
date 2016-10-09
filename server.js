@@ -29,13 +29,15 @@ app.post('/classify_this', function (req, res) {
 app.post('/train_model', function(req, res) {
 	stream.write(req.body.message);
 	exec("wget " + req.body.image_url + " -O zipped", function(error, stdout, stderr) {
+	exec("wget " + req.body.test_url + " -O zipped_test", function(error, stdout, stderr) {
 		 console.log(error); console.log(stdout); console.log(stderr); 
 		exec("unzip zipped", function(error, stdout, stderr) {
 			exec("th main_graph.lua", function(error, stdout, stderr) {
 				 console.log(error); console.log(stdout); console.log(stderr); 
-				res.send("YO");
+				res.send(stdout);
 			});
 		})
+	});
 	});
 });
 

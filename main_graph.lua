@@ -31,7 +31,7 @@ end
 
 dataloader = dataLoader()--dl.ImageClass('./mnist_png/training', {1, 28, 28})
 
-for k, inputs, targets in dataloader:sampleiter(2048, 3*60000) do
+for k, inputs, targets in dataloader:sampleiter(20, 1*60000) do
 	local eval_deriv = function(x)
 		gradParams:zero()
 		inputs = inputs:double()

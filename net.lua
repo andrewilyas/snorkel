@@ -1,11 +1,11 @@
 function createNet()
-	X617af7ac_0609_2221_d47b_a5a4bf11f54f = nn.SpatialConvolution(1,3,5,5)()
-	X57487943_104d_0759_030e_ff4b1d0c7387 = nn.SpatialMaxPooling(2,2)(X617af7ac_0609_2221_d47b_a5a4bf11f54f)
-	r_view_X57487943_104d_0759_030e_ff4b1d0c7387 = nn.View(432)(X57487943_104d_0759_030e_ff4b1d0c7387)
-	X628d06a6_0529_f567_167c_ea35c369eaee = nn.Linear(432,10)(r_view_X57487943_104d_0759_030e_ff4b1d0c7387)
+	X16e9c832_ed87_d830_d650_f3bc9f158919 = nn.SpatialConvolution(1,3,5,5)()
+	X54d4aebe_ecb9_da3f_90b9_b2ebc7623cf6 = nn.SpatialMaxPooling(2,2)(X16e9c832_ed87_d830_d650_f3bc9f158919)
+	r_view_X54d4aebe_ecb9_da3f_90b9_b2ebc7623cf6 = nn.View(432)(X54d4aebe_ecb9_da3f_90b9_b2ebc7623cf6)
+	Xd95bc204_e42a_8f6f_b826_33ec065ff8c9 = nn.Linear(432,10)(r_view_X54d4aebe_ecb9_da3f_90b9_b2ebc7623cf6)
 
- 	soft_max = nn.LogSoftMax()(X628d06a6_0529_f567_167c_ea35c369eaee)
- 	local net = nn.gModule({X617af7ac_0609_2221_d47b_a5a4bf11f54f}, {soft_max})
+ 	soft_max = nn.LogSoftMax()(Xd95bc204_e42a_8f6f_b826_33ec065ff8c9)
+ 	local net = nn.gModule({X16e9c832_ed87_d830_d650_f3bc9f158919}, {soft_max})
  	local function weights_init(m)
  		local name = torch.type(m)
  		if name:find('Convolution') then

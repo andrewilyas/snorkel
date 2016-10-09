@@ -8,7 +8,8 @@ function submitInput() {
 		allString += "function dataLoader()\n\treturn textLoader('rt-polarity.all', 28, 28)\nend"
 	} else {
 		//allString += "function dataLoader()\n\treturn imageLoader('mnist_png/training', 28, 28)\nend"
-		allString += "function dataLoader()\n\treturn imageLoader('training', 28, 28)\nend"
+		allString += "function dataLoader()\n\treturn imageLoader('training', 28, 28)\nend\n"
+		allString += "\nfunction testLoader()\n\treturn imageLoader('testing', 28, 28)\nend\n"
 	}
 
 	var loaderDiv = document.createElement("div");
@@ -16,11 +17,12 @@ function submitInput() {
 	document.body.appendChild(loaderDiv);
 
 	$.ajax({
-		'url': 'http://40.84.230.70:3000/train_model',
+		'url': '/train_model',
 		'method': 'POST',
 		'data': {
 			'message': allString,
-			'image_url': $("#training_url").val()
+			'image_url': $("#training_url").val(),
+			'test_url': $("#testing_url").val()
 		}
 	}).done(function() {
 		$(".loader").remove();
@@ -30,7 +32,7 @@ function submitInput() {
 
 function requestOutput() {
 	$.ajax({
-		'url': 'http://40.84.230.70:3000/classify_this',
+		'url': '/classify_this',
 		'method': 'POST',
 		'data': {
 			'image_url': $("#image_url").val()

@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css">
+        <link rel="stylesheet" href="style.css" />
+        <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="topsort.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.0.7/jsPlumb.js"></script>
+        <script src="utils.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"></script>
+        <script src="onsubmit.js"></script>
+        <script src="forms.js"></script>
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <div id="buttonwrapper">
+            <button class="ui button" onclick="addLayer()">Add a Layer!</button>
+            <button class="ui button" onclick="startAddingConnection()">Add a Connection!</button>
+            <button class="ui button" onclick="parseIntoGraph()">Go!</button><br />
+            <span id="adding">Adding a connection <a href="#" onclick="doneAdding()">Cancel</a></span>
+        </div>
+        <div class="ui modal" id="inputs">
+            <div class="ui form">
+                <div class="grouped fields">
+                    <label>What kind of data are we dealing with here?</label>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                        <input type="radio" name="example2" checked="checked">
+                        <label>Images</label>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                        <input type="radio" name="example2">
+                        <label>Text</label>
+                      </div>
+                    </div><br />
+                    <label>Training dataset</label>
+                    <span>A public link to your training dataset. If you selected free text above, this should be a text file with each line representing a data point (TEXT-tab-class). If you selected images, this should be a link to a folder of png/jpeg files. We suggest Dropbox for hosting.</span>
+                    <input type="text" placeholder="Training Data URL" id="training_url" /></text> <br /><br/>
+
+                    <label>Testing dataset</label>
+                    <span>This should be in the same format as the training data (see above).</span>
+                    <input type="text" placeholder="Testing Data URL" /></text>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="ui positive right labeled icon button" onclick="submitInput()">
+                    Use this data!
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="ui modal" id="outputs">
+            <div class="ui form">
+                The model is done training! Try pasting a link to an image here:
+                <div class="grouped fields">
+                    <label>Test Sample: </label>
+                    <input type="text" placeholder="Image URL" id="image_url" /></text> <br /><br/>
+                </div>
+                <label>Classified Output Class:</label><span id="classifier_result"></span>
+                <button class="ui button" onclick="requestOutput()">Classify!</button>
+            </div>
+            <div class="actions">
+                <div class="ui positive right labeled icon button">
+                    Done
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

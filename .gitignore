@@ -1,0 +1,10 @@
+*.hdf5
+*.t7
+*.zip
+*.all
+*.txt
+zipped
+training
+mnist_png
+torch-hdf5/
+test_data/

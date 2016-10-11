@@ -7,4 +7,5 @@ zipped
 training
 mnist_png
 torch-hdf5/
+__MACOSX/
 test_data/

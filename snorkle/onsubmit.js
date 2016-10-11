@@ -24,7 +24,8 @@ function submitInput() {
 			'image_url': $("#training_url").val(),
 			'test_url': $("#testing_url").val()
 		}
-	}).done(function() {
+	}).done(function(data) {
+		$("#test_accuracy").text(data);
 		$(".loader").remove();
 		$('.ui.modal#outputs').modal('show');
 	});

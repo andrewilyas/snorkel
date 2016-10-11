@@ -31,7 +31,7 @@ end
 
 dataloader = dataLoader()--dl.ImageClass('./mnist_png/training', {1, 28, 28})
 
-for k, inputs, targets in dataloader:sampleiter(20, 1*60000) do
+for k, inputs, targets in dataloader:sampleiter(100, 3*60000) do
 	local eval_deriv = function(x)
 		gradParams:zero()
 		inputs = inputs:double()
@@ -49,6 +49,23 @@ for k, inputs, targets in dataloader:sampleiter(20, 1*60000) do
 	}
 	optim.sgd(eval_deriv, params, sgdState)
 	print(k)
+end
+
+test_dataloader = testLoader()
+local top1 = 0
+local counter = 0
+for k, inputs, targets in test_dataloader:sampleiter(256, 10000) do
+	inputs = inputs:double()
+	local output = net:forward(inputs)
+	local _,preds = output:float():sort(2, true)
+	for i=1,targets:size(1) do
+		local rank = torch.eq(preds[i], targets[i]):nonzero()[1][1]
+		if rank == 1 then
+			top1 = top1 + 1
+		end
+		counter = counter + 1
+	end
+	print(top1/counter)
 end
 
 torch.save('model.t7', net)
